@@ -1,5 +1,4 @@
 -- DRL 
-
 -- create a new database called org
 CREATE DATABASE org;
 
@@ -10,26 +9,26 @@ SHOW DATABASES;
 USE org;
 
 -- create workers table
-CREATE TABLE workers (
-    worker_id     INT PRIMARY KEY,
-    first_name    VARCHAR(25),
-    last_name     VARCHAR(25),
-    salary        INT,
-    joining_date  DATE,
-    department    CHAR(25)
+CREATE TABLE workers(
+    worker_id INT PRIMARY KEY,
+    first_name VARCHAR(25),
+    last_name VARCHAR(25),
+    salary INT,
+    joining_date DATE,
+    department CHAR(25)
 );
 
 -- insert records into workers table
 INSERT INTO workers(worker_id, first_name, last_name, salary, joining_date, department)
 VALUES 
 (001, 'Raghav', 'Gupta', 1000000, '2024-06-15', 'HR'),
-(002, 'Aarav',  'Sharma', 850000, '2025-03-01', 'Admin'),
-(003, 'Ishita', 'Mehta',  920000, '2024-11-20', 'HR'),
-(004, 'Kabir',  'Verma',  760000, '2025-07-10', 'Admin'),
-(005, 'Ananya', 'Singh',  880000, '2026-01-05', 'Admin'),
-(006, 'Dev',    'Patel',  950000, '2025-09-12', 'Finance'),
-(007, 'Sanya',  'Kapoor', 720000, '2024-08-25', 'Finance'),
-(008, 'Arjun',  'Nair',   870000, '2025-05-15', 'Admin');
+(002, 'Aarav', 'Sharma', 850000, '2025-03-01', 'Admin'),
+(003, 'Ishita', 'Mehta', 920000, '2024-11-20', 'HR'),
+(004, 'Kabir', 'Verma', 760000, '2025-07-10', 'Admin'),
+(005, 'Ananya', 'Singh', 880000, '2026-01-05', 'Admin'),
+(006, 'Dev', 'Patel', 950000, '2025-09-12', 'Finance'),
+(007, 'Sanya', 'Kapoor', 720000, '2024-08-25', 'Finance'),
+(008, 'Arjun', 'Nair', 870000, '2025-05-15', 'Admin');
 
 -- view all workers
 SELECT * 
@@ -38,8 +37,8 @@ FROM workers;
 -- create bonuses table with foreign key referencing workers
 CREATE TABLE bonuses (
     worker_ref_id INT,
-    bonus_amount  INT,
-    bonus_date    DATE,
+    bonus_amount INT,
+    bonus_date DATE,
     FOREIGN KEY(worker_ref_id) REFERENCES workers(worker_id) ON DELETE CASCADE
 );
 
@@ -47,8 +46,8 @@ CREATE TABLE bonuses (
 INSERT INTO bonuses(worker_ref_id, bonus_amount, bonus_date)
 VALUES 
 (001, 10000, '2025-06-01'),
-(003,  5000, '2025-11-01'),
-(007,  3000, '2025-08-01');
+(003, 5000, '2025-11-01'),
+(007, 3000, '2025-08-01');
 
 -- view bonuses
 SELECT * 
@@ -57,7 +56,7 @@ FROM bonuses;
 -- create titles table with foreign key referencing workers
 CREATE TABLE titles (
     worker_ref_id INT,
-    worker_title  CHAR(25),
+    worker_title CHAR(25),
     affected_from DATE,
     FOREIGN KEY(worker_ref_id) REFERENCES workers(worker_id) ON DELETE CASCADE
 );
@@ -65,14 +64,14 @@ CREATE TABLE titles (
 -- insert records into titles table
 INSERT INTO titles(worker_ref_id, worker_title, affected_from)
 VALUES 
-(001, 'Lead',              '2024-06-15'),
+(001, 'Lead', '2024-06-15'),
 (002, 'Assistant Manager', '2025-03-01'),
-(003, 'Executive',         '2024-11-20'),
-(004, 'Execuitve',         '2025-07-10'),
-(005, 'Manager',           '2026-01-05'),
-(006, 'Lead',              '2025-09-12'),
+(003, 'Executive', '2024-11-20'),
+(004, 'Execuitve', '2025-07-10'),
+(005, 'Manager', '2026-01-05'),
+(006, 'Lead', '2025-09-12'),
 (007, 'Assistant Manager', '2024-08-25'),
-(008, 'Executive',         '2025-05-15');
+(008, 'Executive', '2025-05-15');
 
 -- view titles
 SELECT * 
@@ -187,7 +186,7 @@ ORDER BY 2 DESC;
 
 -- display worker_id, first_name, and annual salary (calculated),
 -- then sort by annual salary in descending order
-SELECT worker_id, first_name, salary*12 AS annual_salary
+SELECT worker_id, first_name, salary * 12 AS annual_salary
 FROM workers
 ORDER BY annual_salary DESC;
 
@@ -201,10 +200,10 @@ FROM workers;
 -- insert duplicate-like data for DISTINCT examples
 INSERT INTO workers(worker_id, first_name, last_name, salary, joining_date, department)
 VALUES 
-(011, 'Aseem',      'Gupta',    1000000, '2024-06-15', 'HR'),
-(012, 'Deeptanshu', 'Bhardwaj',  850000, '2025-03-01', 'Admin'),
-(013, 'Azeem',      'Khan',      920000, '2024-11-20', 'HR'),
-(014, 'Param',      'Verma',     760000, '2025-07-10', 'Admin');
+(011, 'Aseem', 'Gupta', 1000000, '2024-06-15', 'HR'),
+(012, 'Deeptanshu', 'Bhardwaj', 850000, '2025-03-01', 'Admin'),
+(013, 'Azeem', 'Khan', 920000, '2024-11-20', 'HR'),
+(014, 'Param', 'Verma', 760000, '2025-07-10', 'Admin');
 
 -- get distinct combinations of department and salary
 SELECT DISTINCT department, salary 

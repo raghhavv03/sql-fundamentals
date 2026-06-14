@@ -1,5 +1,4 @@
 -- joins
-
 CREATE DATABASE test;
 
 USE test;
@@ -32,39 +31,39 @@ INSERT INTO orders VALUES
 SELECT c.*, o.*
 FROM customers c
 INNER JOIN orders o
-ON c.customer_id=o.customer_id;
+ON c.customer_id = o.customer_id;
 
 SELECT c.customer_name, o.product
 FROM customers c
 INNER JOIN orders o
-ON c.customer_id=o.customer_id;
+ON c.customer_id = o.customer_id;
 
 -- INNER JOIN without using JOIN
 SELECT c.customer_name, o.product
 FROM customers c, orders o
-WHERE c.customer_id=o.customer_id;
+WHERE c.customer_id = o.customer_id;
 
 -- LEFT JOIN
 SELECT c.*, o.*
 FROM customers c
 LEFT JOIN orders o
-ON c.customer_id=o.customer_id;
+ON c.customer_id = o.customer_id;
 
 SELECT c.customer_name, o.product
 FROM customers c
 LEFT JOIN orders o
-ON c.customer_id=o.customer_id;
+ON c.customer_id = o.customer_id;
 
 -- RIGHT JOIN
 SELECT c.*, o.*
 FROM customers c
 RIGHT JOIN orders o
-ON c.customer_id=o.customer_id;
+ON c.customer_id = o.customer_id;
 
 SELECT c.customer_name, o.product
 FROM customers c
 RIGHT JOIN orders o
-ON c.customer_id=o.customer_id;
+ON c.customer_id = o.customer_id;
 
 -- FULL JOIN
 SELECT c.*, o.*
@@ -98,8 +97,8 @@ CROSS JOIN orders o;
 
 -- SELF JOIN
 ALTER TABLE customers ADD referred_by INT;
-UPDATE customers SET referred_by=1 WHERE customer_id=2; -- Bob referred by Alice
-UPDATE customers SET referred_by=2 WHERE customer_id=3; -- Charlie referred by Bob
+UPDATE customers SET referred_by = 1 WHERE customer_id = 2; -- Bob referred by Alice
+UPDATE customers SET referred_by = 2 WHERE customer_id = 3; -- Charlie referred by Bob
 
 -- simulate using INNER JOIN
 SELECT c.customer_name AS Customer, r.customer_name AS Referred_By
@@ -179,28 +178,28 @@ INSERT INTO projects (id, project_name, emp_id, start_date, client_id) VALUES
 SELECT e.id, e.name, p.id, p.project_name
 FROM employees e
 INNER JOIN projects p
-ON e.id=p.emp_id;
+ON e.id = p.emp_id;
 
 -- fetch all the employees’ IDs and contact details (name, email, phone) who work from 'New York' and handle clients located in 'Chicago'
 SELECT e.id, e.name, e.email_id, e.phone, e.city, c.name, c.city
 FROM employees e
 INNER JOIN clients c
-ON e.id=c.emp_id
-WHERE e.city='New York' AND c.city='Chicago';
+ON e.id = c.emp_id
+WHERE e.city = 'New York' AND c.city = 'Chicago';
 
--- LEFT JOIN 
+-- LEFT JOIN
 -- fetch all projects allocated to each employee
 SELECT e.id, e.name, p.id, p.project_name
 FROM employees e
 LEFT JOIN projects p
-ON e.id=p.emp_id;
+ON e.id = p.emp_id;
 
 -- RIGHT JOIN
 -- list all projects along with the employees' name and their respective emails
 SELECT  p.id, p.project_name, e.name, e.email_id
 FROM employees e
 RIGHT JOIN projects p
-ON e.id=p.emp_id;
+ON e.id = p.emp_id;
 
 
 

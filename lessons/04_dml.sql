@@ -1,5 +1,4 @@
 -- DML
-
 USE org;
 
 CREATE TABLE employees(

@@ -1,5 +1,4 @@
 -- introduction
-
 CREATE DATABASE temp;
 
 USE temp;

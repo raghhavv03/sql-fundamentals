@@ -1,5 +1,4 @@
 -- referential constraints
-
 USE temp;
 
 CREATE TABLE departments(

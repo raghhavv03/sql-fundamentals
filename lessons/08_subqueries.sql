@@ -1,5 +1,4 @@
 -- subqueries
-
 CREATE DATABASE company;
 
 use company;
@@ -37,20 +36,20 @@ INSERT INTO projects VALUES
 -- find employees earning more than the average salary
 SELECT name,salary
 FROM employees
-WHERE salary>(SELECT AVG(salary) FROM employees);
+WHERE salary > (SELECT AVG(salary) FROM employees);
 
 -- find the highest-paid employee
 SELECT name,salary
 FROM employees
-WHERE salary=(SELECT MAX(salary) FROM employees);
+WHERE salary = (SELECT MAX(salary) FROM employees);
 
 -- find employees whose salary is above the average salary of all employees in 'New York'
 SELECT name,city,salary
 FROM employees
-WHERE salary>(
+WHERE salary > (
     SELECT AVG(salary)
     FROM employees
-    WHERE city='New York'
+    WHERE city = 'New York'
 );
 
 -- multi row subqueries
@@ -65,44 +64,44 @@ FROM employees
 WHERE city IN(
     SELECT city
     FROM employees
-    WHERE name='Bob'
+    WHERE name = 'Bob'
 );
 
 -- find employees who earn more than ALL employees in 'New York'
 SELECT name,salary
 FROM employees
-WHERE salary>ALL(
+WHERE salary > ALL(
     SELECT salary
     FROM employees
-    WHERE city='New York'
+    WHERE city = 'New York'
 );
 
 -- correlated subqueries
 -- find employees who earn more than the average salary in their city
 SELECT name,city,salary
 FROM employees e
-WHERE salary>(
+WHERE salary > (
     SELECT AVG(salary)
     FROM employees
-    WHERE city=e.city
+    WHERE city = e.city
 );
 
 -- find employees whose salary is the highest in their city
 SELECT name,city,salary
 FROM employees e
-WHERE salary=(
+WHERE salary = (
     SELECT MAX(salary)
     FROM employees
-    WHERE city=e.city
+    WHERE city = e.city
 );
 
 -- find the employees who have the 3rd highest salary in the company
 SELECT name,salary
 FROM employees e1
-WHERE 3=(
+WHERE 3 = (
 	SELECT COUNT(e2.salary)
     FROM employees e2
-    WHERE e2.salary>=e1.salary
+    WHERE e2.salary >= e1.salary
 );
 
 -- subqueries in FROM
@@ -121,7 +120,7 @@ FROM(
     FROM employees
     GROUP BY city
 ) AS city_summary
-WHERE total_employees>1;
+WHERE total_employees > 1;
 
 
 -- find the highest salary among the employees whose names contain letter 'a'
@@ -142,12 +141,12 @@ FROM employees;
 SELECT name,
        (SELECT COUNT(*)
         FROM projects p
-        WHERE p.emp_id=e.emp_id) AS project_count
+        WHERE p.emp_id = e.emp_id) AS project_count
 FROM employees e;
 
 -- show employees and difference between their salary and company’s average salary
 SELECT name,salary,
-       salary-(SELECT AVG(salary) FROM employees) AS diff_from_avg
+       salary - (SELECT AVG(salary) FROM employees) AS diff_from_avg
 FROM employees;
 
 

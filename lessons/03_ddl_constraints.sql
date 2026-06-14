@@ -1,5 +1,4 @@
 -- DDL constraints
-
 USE temp;
 
 -- PRIMARY KEY constraint
@@ -28,12 +27,12 @@ CREATE TABLE orders(
 CREATE TABLE employees(
     emp_id INT PRIMARY KEY,
     name VARCHAR(100),
-    age INT CHECK(AGE>=18),
+    age INT CHECK(AGE >= 18),
     salary DECIMAL(10,2)
     -- multiple column check
-    -- CHECK(age>=18 AND salary>0)
+    -- CHECK(age >= 18 AND salary > 0)
     -- or named check constraint
-    -- CONSTRAINT chk_employee CHECK(age>=18 AND salary>0)
+    -- CONSTRAINT chk_employee CHECK(age >= 18 AND salary > 0)
 );
 
 -- DEFAULT constraint
